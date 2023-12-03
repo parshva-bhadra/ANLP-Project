@@ -8,16 +8,18 @@ def modify_json(file_name):
     for id, input_dict in enumerate(json_file):
         answers = []
         for s_ans in input_dict['answers']:
-            answer = ""
+            answer = {}
+            answer['title'] = ""
+            answer['text'] = ''
             for s in s_ans['sents']:
-                answer += s['text']
+                answer['text'] += s['text']
             answers.append(answer)
             
         output_dict = {
             'id': str(id),
             'question': input_dict['question']['question'],
             'target': input_dict['summaries'][0][0],
-            'answers': input_dict['summaries'],
+            'answers': input_dict['summaries'][0],
             'ctxs': answers,
         }
         
